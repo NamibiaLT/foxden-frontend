@@ -1,6 +1,6 @@
 const {
   renderPost
-} = require("./src/index.js");
+} = require("./index.js");
 
 
 describe("renderPost", () => {
