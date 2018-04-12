@@ -23,17 +23,21 @@ type Props = {
 }
 
 class App extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = {
-  //     value: null
-  //   }
-  // }
+
   render() {
-    console.log(this.state.value);
-    return <div>Hello World!</div>
+    return this.props.data.posts.map(post => this.renderPost(post))
+  }
+
+  renderPost(post: Post) {
+    return (
+    <img src={post.imageUrl}/>
+    )
   }
 }
 
 const appRoot = document.getElementById("root");
 appRoot && ReactDOM.render(<App data={foxesData} />, appRoot);
+
+module.exports = {
+  renderPost
+};
