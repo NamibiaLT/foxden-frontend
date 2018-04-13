@@ -3,16 +3,18 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import foxesData from "./foxes.json";
 
+type UserId = "01" | "02"
+
 type Post = {
   id: string,
-  userId: string,
+  userId: UserId,
   description: string,
   imageUrl: string
 };
 
 type User = {
-  id: string,
-  username: string
+  id: UserId,
+  username: string,
 };
 
 type Props = {
@@ -33,13 +35,19 @@ class App extends Component<Props> {
   }
 
   renderPost(post: Post) {
+    const author = getUserById(this.props.data.users, post.userId)
     return (
-    <img src={post.imageUrl} key={post.id} alt={post.description}/>
+      <div>
+        <img src={post.imageUrl} key={post.id} alt={post.description}/>
+        <div>{author ? author.username : "anonymous"}</div>
+      </div>
     )
   }
 
-  getUserById()
+}
 
+function getUserById(aListOfUsers: Array<User>, theIdOfTheUserWeWant: UserId) {
+  return aListOfUsers.find(myUser => myUser.id === theIdOfTheUserWeWant)
 }
 
 // function renderApp() {
@@ -54,4 +62,7 @@ appRoot && ReactDOM.render(<App data={foxesData} />, appRoot);
 //
 // };
 
-export default App
+export {
+  App,
+  getUserById
+}
