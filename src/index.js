@@ -25,19 +25,33 @@ type Props = {
 class App extends Component<Props> {
 
   render() {
-    return this.props.data.posts.map(post => this.renderPost(post))
+    return (
+      <div>
+        {this.props.data.posts.map(post => this.renderPost(post))}
+      </div>
+    )
   }
 
   renderPost(post: Post) {
     return (
-    <img src={post.imageUrl}/>
+    <img src={post.imageUrl} key={post.id} alt={post.description}/>
     )
   }
+
+  getUserById()
+
 }
+
+// function renderApp() {
+//   const appRoot = document.getElementById("root");
+//   appRoot && ReactDOM.render(<App data={foxesData} />, appRoot);
+// };
 
 const appRoot = document.getElementById("root");
 appRoot && ReactDOM.render(<App data={foxesData} />, appRoot);
 
-module.exports = {
-  renderPost
-};
+// module.exports = {
+//
+// };
+
+export default App
