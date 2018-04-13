@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from './index.js';
+import { App, getUserById } from './index.js';
 
 it('renders without crashing', () => {
     const post = {
@@ -11,26 +11,13 @@ it('renders without crashing', () => {
     const data = {
       posts: [post]
     }
-  expect(mount(<App data={data}/>).html()).toBe(<div><img src="link.com" key="123" alt="cute fox" /></div>);
+  expect(mount(<App data={data}/>).contains(<div><img src="link.com" key="123" alt="cute fox" /></div>)).toBe(true);
   // expect(shallow()).to.have.property
 });
 
-// import React from 'react';
-// import {shallow} from 'enzyme';
-// import App from "./index.js";
+it ('returns a User when given a userId and an arry of users', () => {
+  const userId = "01"
+  const users = [{id: "01", username: "the rock"}, {id:"02", username: "xxx"}]
 
-// describe("App", () => {
-//   test("renders pictures of foxes", () => {
-//     const post = {
-//       id: '123',
-//       description: 'cute fox',
-//       imageUrl: 'link.com'
-//     }
-//     const data = {
-//       posts: [post]
-//     }
-//     const app = shallow(<App data={data} />)
-//     console.log(app.html())
-//     expect(app.html()).toEqual('<img src="link.com"/>')
-//   });
-// });
+  expect(getUserById(users, userId)).toEqual({id: "01", username: "the rock"})
+});
